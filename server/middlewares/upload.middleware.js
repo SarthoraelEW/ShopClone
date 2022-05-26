@@ -1,6 +1,5 @@
 const fs = require("fs");
 const { promisify } = require("util");
-const { uploadErrors } = require("../utils/error.utils");
 const pipeline = promisify(require("stream").pipeline);
 
 exports.uploadFiles = async (req, l) => {
