@@ -1,7 +1,9 @@
+import Routes from "./components/Routes/Index";
+
 function App() {
   return (
     <div className="App">
-      Hello World!
+      <Routes />
     </div>
   );
 }

@@ -26,7 +26,9 @@ exports.getProduct = async (id) => {
 
 exports.getAllProducts = async () => ProductModel.find({}).exec();
 
-exports.getProductsByCollection = async (req, res) => { };
+exports.getProductsByCollection = async (collection) => ProductModel.find({
+  collections: { $in: collection }
+}).exec();
 
 /************** Modify product **************/
 

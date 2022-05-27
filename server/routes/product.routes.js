@@ -34,7 +34,12 @@ router.get("/get-all-products", async (req, res) => {
 
 router.get(
   "/get-products-by-collection/:collection",
-  productController.getProductsByCollection
+  async (req, res) => {
+    const result = await productController.getProductsByCollection(req.params.collection);
+    return result !== null
+      ? res.status(200).json(result)
+      : res.status(500).json("Internal Error");
+  }
 );
 
 // Modify product

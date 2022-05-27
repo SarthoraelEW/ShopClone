@@ -45,7 +45,7 @@ const CommandSchema = new mongoose.Schema(
     instruction: {
       type: String,
       maxlength: 1000,
-      default: ""
+      required: true
     }
   },
   {

@@ -14,7 +14,7 @@ const SAVRequestSchema = new mongoose.Schema(
     },
     phoneNumber: {
       type: String,
-      default: ""
+      required: true
     },
     message: {
       type: String,
