@@ -108,9 +108,9 @@ router.delete("/delete-product/:id", async (req, res) => {
   if (!ObjectId.isValid(req.params.id))
     return res.status(404).json({ error: "ID unknow: " + req.params.id });
 
-  const result = await productController.deleteProduct(req);
+  const result = await productController.deleteProduct(req.params.id);
   return result != null
-    ? res.status(200).json(result)
+    ? res.status(200).json(`Product ${req.params.id} succesfully  deleted`)
     : res.status(500).json("Internal Error");
 });
 

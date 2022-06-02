@@ -62,19 +62,23 @@ exports.updateDescription = async (req) => {
   ).exec();
 };
 
-// NOT TESTED
 exports.updateSize = async (req) => {
   const { size, style, quantity } = req.body;
 
-  const product = this.getProduct(req.params.id);
+  const product = await this.getProduct(req.params.id);
   let quantities = product.quantities;
   let found = false;
-  quantities.forEach(q => {
-    if (q.size === size && q.style === style) {
-      q.quantity = quantity;
+  for (let i = 0; i < quantities.length; i++) {
+    if (quantities[i].size === size && quantities[i].style === style) {
+      if (quantity === "0") {
+        quantities.splice(i, 1);
+      } else {
+        quantities[i].quantity = quantity;
+      }
       found = true;
+      break;
     }
-  });
+  }
   if (!found) {
     quantities.push({ size: size, style: style, quantity: quantity });
   }
@@ -87,7 +91,6 @@ exports.updateSize = async (req) => {
   ).exec();
 };
 
-// NOT TESTED
 exports.addCollection = async (req) => {
   return ProductModel.findByIdAndUpdate(
     req.params.id,
@@ -98,7 +101,6 @@ exports.addCollection = async (req) => {
   ).exec();
 };
 
-// NOT TESTED
 exports.removeCollection = async (req) => {
   return ProductModel.findByIdAndUpdate(
     req.params.id,
@@ -111,27 +113,24 @@ exports.removeCollection = async (req) => {
 
 /************** Delete product **************/
 
-// NOT TESTES
-exports.deleteProduct = async (id) => ProductModel.findByIdAndDelete(id).exec();
+exports.deleteProduct = async (id) => await ProductModel.findByIdAndDelete(id);
 
 /************** Upload and delete Photos **************/
 
-// NOT TESTED
 exports.uploadPhotos = async (req) => {
-  const product = this.getProduct(req.params.id);
+  const product = await this.getProduct(req.params.id);
   try {
     const photos = await uploadFiles(req, product.photos.length);
     product.photos = product.photos.concat(photos);
     await product.save();
     return product;
   } catch (err) {
-    return err;
+    return null;
   }
 };
 
-// NOT TESTED
 exports.deletePhoto = async (req) => {
-  const product = this.getProduct(req.params.id);
+  const product = await this.getProduct(req.params.id);
 
   product.photos = product.photos.filter((url) => url !== req.body.photo);
   try {
