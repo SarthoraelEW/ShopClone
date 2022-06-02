@@ -26,7 +26,7 @@ exports.uploadFiles = async (req, l) => {
         await pipeline(
           req.files[j].stream,
           fs.createWriteStream(
-            `${__dirname}/../../client/uploads/products/${filename}`
+            `${__dirname}/../../client/public/uploads/products/${filename}`
           )
         );
         photos.push("./uploads/products/" + filename);
@@ -38,7 +38,7 @@ exports.uploadFiles = async (req, l) => {
 };
 
 exports.deleteFile = async (file) => {
-  const filename = `${__dirname}/../../client/` + file;
+  const filename = `${__dirname}/../../client/public/` + file;
   fs.unlink(filename, (err) => {
     if (err) {
       throw Error(err);
