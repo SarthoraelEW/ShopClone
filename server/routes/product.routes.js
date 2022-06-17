@@ -42,6 +42,16 @@ router.get(
   }
 );
 
+router.get(
+  "/get-recent-products/:limit",
+  async (req, res) => {
+    const result = await productController.getRecentProducts(req.params.limit);
+    return result !== null
+      ? res.status(200).json(result)
+      : res.status(500).json("Internal Error");
+  }
+);
+
 // Modify product
 router.put("/update-title/:id", async (req, res) => {
   if (!ObjectId.isValid(req.params.id))

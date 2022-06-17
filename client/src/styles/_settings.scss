@@ -1,3 +1,5 @@
+$purple: #e50a7b;
+
 body {
   font-size: 16px;
   font-family: Cabin, sans-serif;
@@ -5,6 +7,10 @@ body {
   font-weight: 400;
   color: #666;
   line-height: 1.375;
+}
+
+li {
+  list-style: none;
 }
 
 * {

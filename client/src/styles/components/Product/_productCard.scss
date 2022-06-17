@@ -1,0 +1,29 @@
+.productCardContainer {
+  border-left-width: 1px;
+  position: relative;
+  display: block;
+  background-color: #fff;
+  text-align: center;
+  border-color: #f0f0f0;
+  border-style: solid;
+  color: #666;
+  z-index: 1;
+  cursor: pointer;
+
+  img {
+    width: 100%;
+    max-width: 157px;
+    margin-bottom: 10px;
+  }
+
+  .productTitle {
+    font-weight: 600;
+    color: #222;
+    white-space: normal;
+    margin-bottom: 5px;
+  }
+
+  .productPrice {
+    font-size: 0.875em;
+  }
+}

@@ -30,6 +30,8 @@ exports.getProductsByCollection = async (collection) => ProductModel.find({
   collections: { $in: collection }
 }).exec();
 
+exports.getRecentProducts = async (limit) => ProductModel.find({}).sort("-createdAt").limit(parseInt(limit)).exec();
+
 /************** Modify product **************/
 
 exports.updateTitle = async (req) => {
